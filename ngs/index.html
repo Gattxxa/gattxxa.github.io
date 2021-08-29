@@ -4,10 +4,33 @@
         <meta charset="UTF-8">
         <link rel="icon" href="favicon.ico">
         <link rel="stylesheet" href="base.css">
-      <title>Gattxxa.org | GitHub.io</title>
+        <script src="../jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="calculator.js"></script>
+      <title>NGS calculator</title>
     </head>
 
     <body>
-        test
+        <h1>実武器上昇計算機～</h1>
+        <div class="equipment">
+            <div>
+                武器　
+                <input type="number" step="0.01" value="0.00" id="weapon">
+            </div>
+            <div>
+                防具１
+                <input type="number" step="0.01" value="0.00" id="unit1">
+            </div>
+            <div>
+                防具２
+                <input type="number" step="0.01" value="0.00" id="unit2">
+            </div>
+            <div>
+                防具３
+                <input type="number" step="0.01" value="0.00" id="unit3">
+            </div>
+            <button id="calc">計算</button>
+        </div>
+        <br>
+        武器上昇 ＋<span id="result">0.0</span>
     </body>
 </html>
