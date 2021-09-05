@@ -1,0 +1,73 @@
+html {
+  background: #2f3136;
+  color: #dcddde;
+  text-align: center;
+  user-select: none;
+}
+
+body {
+  background: #36393f;
+  text-align: center;
+  margin: 2em;
+  padding-bottom: 1em;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+#profile {
+  margin-bottom: 3em;
+}
+
+.icon {
+  max-width: 200px;
+  width: 50%;
+  max-height: 200px;
+  height: 50%;
+  border-radius: 50%;
+  margin-top: 2em;
+  pointer-events: none;
+}
+
+.command{
+  user-select: text;
+  font-weight: bold;
+  color: #fafafa;
+  padding: 0px 1.5em 0px;
+  background: #2f3136;
+}
+
+.hint {
+  color: #fafafa;
+  font-size: 0.9em;
+}
+
+.bold{
+  user-select: text;
+  font-weight: bold;
+  color: #fafafa;
+}
+
+.btn-disabled {
+  color: #fafafa;
+  background-color: #40444b;
+  padding: 7px 15px 7px;
+  border-radius: 5px;
+  text-decoration: none;
+  pointer-events:none;
+}
+
+.btn {
+  color: #fafafa;
+  background-color: #5865F2;
+  padding: 7px 15px 7px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #3c45a5;
+  transition: all  0.3s ease;
+}
+
