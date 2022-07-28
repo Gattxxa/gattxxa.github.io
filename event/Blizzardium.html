@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Blizzardium</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+    padding: 0.5rem 0rem;
+    margin-bottom: 0.2rem;
+    border-bottom: 3px solid #f6ba33;
+    font-weight: bold;
+}
+
+h2 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1>Event: ブリザーディアム堀り 6/20~7/4, Ship 9</h1>
+<p style="color: red; font-size: larger;"><strong>こちらのイベントは終了しました。</strong><br>
+<p><strong><s>6/20~7/4 にかけて大規模なブリザーディアム堀りを行います。</s></strong><br>
+企画主催：<a href="https://twitter.com/PSO2NGS_JP">PSO2NGS 15分前緊急予告BOT - JP@PSO2NGS_JP</a></p>
+
+
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>開催シップ</td>
+<td>Ship9 ハガル</td>
+</tr>
+<tr>
+<td>募集定員上限</td>
+<td>100人  (83/100)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>参加プラットフォームについて</strong><br>
+現在の参加しているアークスの多くがPC版, PS版のユーザーであり、クラウド版のアークスが少ない状況です。<br>
+クロスプレイの仕様から、PS版とクラウド版が共存したグループで円滑に堀りを行うことは厳しいと判断しています。<br>
+こちらについて大変申し訳ないですが、ご了承ください。<br></p>
+<h2>公式堀り日 (PSO2の日)</h2>
+<p><strong>PSO2の日で レアドロップ倍率＋25% が付与される日を公式堀り日とします。</strong><br>
+公式堀り日は24時間、いつログインしても何人か掘っている状態であることが望ましいです。</p>
+<table>
+<thead>
+<tr>
+<th>日付</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><s>6/22(水)</s></td>
+<td><s>プレミアム限定PSO2の日</s></td>
+</tr>
+<tr>
+<td><s>6/23(木)</s></td>
+<td><s>プレミアム限定PSO2の日</s></td>
+</tr>
+<tr>
+<td><s>7/2(土)</s></td>
+<td><s>PSO2の日</s></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>6月22日（水）は定期メンテナンスのため、6月22日（水）、6月23日（木）にプレミアムセット有効期間中の方に、お得なブーストやプレゼント配付を実施いたします！<br>
+<a href="https://pso2.jp/players/news/29261/">https://pso2.jp/players/news/29261/</a></p>
+</blockquote>
+<p>ぜひ <strong>N-レアドロップ倍率[24h]+100%</strong> などを用意してご参加ください！<br>
+※上記アイテムは、SGショップにて 900SG で購入可能です。</p>
+<p>通常日は普段通りのブリザーディアム堀りやエンシェント狩りに活用ください。</p>
+<h2>通常日</h2>
+<p><strong>PSO2の日以外の日を通常日とします。</strong><br>
+当然、通常日にもブリザーディアム堀りを行って頂いて構いません。<br>
+(むしろ歓迎です)<br>
+<br>
+備考：結成当日、6/20~6/21にかけての夜中→早朝も稼働していました。</p>
+
+<h2>レギュレーション</h2>
+<h3>フィールド：ベルガナ遺跡 Rank1</h3>
+<blockquote>
+<p><strong>Rank1でのブリザーディアムのドロップは確認済です。</strong><br>
+トライアル発生の回転率を上げるため、Rank1で行うことを強制とします。<s>が推奨されます。</s><br>
+<br>
+Rank2のアークスが混ざってしまうと、Rank1へ戻るのが手間となってしまいます。<br>
+※22/06/21現在、遺跡内でのRank間移動が正常に動作しない場合があるため。<br>
+<br>
+過密ブロックでブリザーディアム堀りを行うことは避けてください。</p>
+</blockquote>
+<h3>トライアル：寒冷地エネミー討伐</h3>
+<blockquote>
+<p><strong>トライアルで出現する凍結コンテナを破壊することで、稀にブリザーディアムが入手できます。</strong><br>
+凍結コンテナ破壊の際は討伐対象エネミーを倒さないよう注意してください。<br>
+<u>破壊を終えた後は速やかにルームキーワードを設定しなおし、ルームから退出してください。</u></p>
+<p>輸送機トライアルは報告不要です。<br>
+<strong>輸送機トライアルから、ブリザーディアムはドロップしません。</strong></p>
+<p>武器を装備しない状態でフローティングボードに乗ると、ぶつかってしまった場合の与ダメージを抑えることができます。<br></p>
+</blockquote>
+<h3>ルームキーワード</h3>
+<blockquote>
+<p><strong>3~5文字の簡易的なキーワードが望ましいです。</strong><br>
+目的のトライアルが発生した場合は、グループチャットでルームキーワードを共有してください。<br>
+コミュニケーション→ルームキーワードから設定可能です。<br>
+<br>
+キーワードは簡単なもの望ましいです。<br>
+'ngs' や 'aaa', '123' など<br>
+ <br>
+例外として誤解を生むキーワードは設定禁止とします。<br>
+'w' や 'ww', 'ok', 'sry', 'afk', ' ' など<br>
+キーワードに空白を含めないでください。</p>
+<p><strong>ルームが満員で入れなかった場合</strong><br>
+ルームに空きができるまで何度か試してください。<br>
+回収中のプレイヤーがルームに1人でもいた場合、遅れても回収することが可能です。<br>
+待っている間に発生中のEマーカーを消化していただくと、トライアル回転率の上昇につながります。<br>
+<br>
+<strong style="color: red;">トライアル発生中のルームへ連続で移動する際に、ルームが満員で入れなかった場合</strong><br>
+適当なパスワードを設定し、<u>現在入っているトライアル発生中のルームから一度退室するようにしください。</u><br>
+我先にとリトライし続ける行為は後続を詰まらせる原因となりますので、ご協力お願いします。
+</p>
+</blockquote>
+<h3 style="color: red;"><strong>禁止事項</strong></h3>
+<blockquote>
+<p><strong>公序良俗に反する行為は一切禁止とします。</strong><br>
+<br>
+明確な禁止事項は以下をご覧ください。<br>
+<ul>
+  <li>公序良俗に反する内容を含んだチャットを送信する行為</li>
+  <li>意図的にトライアルを終了させる行為</li>
+  <li>自分は掘らずにパスワードを待ち続ける行為</li>
+  <li><strong>ほかのブリザーディアム堀りグループ</strong>にパスワードを横流しする行為</li>
+  <ul>
+    <li><u>レギュレーションを理解したフレンドやチームメンバー</u>に関しては許可するものとします。</li>
+	<li>(グループに空きが無く、フレンドやチームメンバーが掘りたいと言っている場合など)</li>
+  </ul>
+  <li>むやみやたらにフレンドを招待する行為</li>
+</ul>
+禁止事項を行うプレイヤーを見かけた場合は、主催まで報告をお願いします。
+</p>
+</blockquote>
+<h3>※何かあった場合には</h3>
+<blockquote>
+<p><strong>グループチャットで議論することなく、主催へ直接報告をお願いします。</strong><br>
+<br>
+報告の際には該当アークスのプレイヤーIDネームを伝えるようにお願いします。<br>
+<u>コメント付きグッジョブ機能</u>で報告頂けると大変助かります。<br>
+<br>
+チャット → グループチャット → メンバーを確認 から報告可能です。</p>
+</blockquote>
+<h2>参加方法</h2>
+
+<p style="color: red;"><strong>グループメンバーの募集は終了しました。</strong></p>
+<!--
+<p style="color: red;"><strong>'22/7/1 Update: PSO2の日に向けて、二次募集を行います。</strong></p>
+<p><strong>コミュニケーション→アークスサーチよりフレンド申請をお願いします。</strong><br>
+検索するプレイヤーIDネームは画像を参照してください。<br>
+本企画でのフレンド申請である旨がわかる内容だと大変助かります。<br>
+
+<img src="friend.png" alt="フレンド申請"></p>
+
+<p><strong>グループチャットへ追加する手段のため、追加後は適当なタイミングでフレンド解除させていただきます。</strong><br>
+フレンド継続しておきたい方は、お手数ですが別途GJなどで連絡お願いします。</p>
+-->
+<h2>質問</h2>
+<h3>Q. 凍結コンテナに対してレアドロップ倍率は効果ありますか？</h3>
+<p>フレンドのドロップ数報告からして、<strong>効果は確実に適応されています。</strong><br>
+	効率が圧倒的に変わってくるため、SGに余裕があれば <strong>N-レアドロップ倍率[24h]+100%</strong> を購入し、使用することをお勧めします。</p>
+<h3>Q. フレンドを誘ってもよいですか？</h3>
+<p>グループチャットには定員上限があります。(最大100人)<br>
+<strong>積極的にブリザーディアム堀りへ参加してくれる人物</strong>であれば、常識的な範囲内でお誘いください。</p>
+<h3>Q. Rank2のほうがよくない？</h3>
+<p>Rankの違いによるドロップ率に関して確定的な証拠がないため、Rank1で回転率をあげる方式を採用しています。<br>
+リューカー移動の際に混乱を招く場合もあるため、<strong>Rank1を強制</strong>とします。</p>
+<h3>Q. 緊急やライブはどうしますか？</h3>
+<p>行くも行かないも自由です。<br>
+プレイヤー同士でライブブースト付与タイミングを教え合えるとGOOD。</p>
+<h2>その他</h2>
+</body>
+</html>
