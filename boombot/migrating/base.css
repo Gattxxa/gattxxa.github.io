@@ -1,0 +1,44 @@
+body {
+  background: #36393f;
+  color: #dcddde;
+  margin: 2em;
+  font-family: sans-serif;
+}
+
+h2 {
+  margin-top: 2em;
+}
+
+.bold{
+  font-weight: bold;
+  color: #fafafa;
+}
+
+.per50 {
+  height: 50%;
+  width: 50%;
+  max-width: 550px;
+  min-width: 550px;
+}
+
+.mention {
+  font-family: system-ui;
+  font-weight: bold;
+  background: #414675;
+  border-radius: 5px;
+  padding: 0 2px;
+  color: #fafafa;
+  text-decoration: none;
+}
+
+.mention:hover {
+  background: #5865f2;
+}
+
+.command{
+  user-select: text;
+  font-weight: bold;
+  color: #fafafa;
+  padding: 0px 1.5em 0px;
+  background: #2f3136;
+}
