@@ -36,7 +36,7 @@ body::before {
 .question:before {
   font-size: 32px;
   color: rgb(240, 255, 255);
-  content: "Ｑ.";
+  content: "◆";
   display: inline-block;
   padding: 0.5rem 1rem;
   padding-top: 0;
@@ -64,7 +64,7 @@ body::before {
 .answer:before {
   font-size: 32px;
   color: rgb(240, 255, 255);
-  content: "Ａ.";
+  content: "";
   display: inline-block;
   vertical-align: middle;
   padding: 0.5rem 1rem;
@@ -93,4 +93,8 @@ body::before {
 span.address:before {
   color: #007bff;
   content: "contact@gattxxa.org";
+}
+
+.h1 {
+  font-size: 28px;
 }
