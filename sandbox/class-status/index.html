@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript" src="class.js"></script>
+    </head>
+    
+    <body>
+        <div id="level-select">
+            <label>Level: </label>
+            <input type="number" name="level" value="1" min="1" max="100">
+        </div>
+        
+        <div id="class-select">
+            <label>Class: </label>
+            <input type="radio" name="className" value="Hu" checked> Hu
+            <input type="radio" name="className" value="Fi"> Fi
+            <input type="radio" name="className" value="Ra"> Ra
+            <input type="radio" name="className" value="Gu"> Gu
+            <input type="radio" name="className" value="Fo"> Fo
+            <input type="radio" name="className" value="Te"> Te
+            <input type="radio" name="className" value="Br"> Br
+            <input type="radio" name="className" value="Bo"> Bo
+            <input type="radio" name="className" value="Wa"> Wa
+        </div>
+
+        <button id="calc">計算</button>
+        <br>
+        <label>HP: </label><span id="hp">300</span><br>
+        <label>ATK: </label><span id="atk">450</span><br>
+        <label>DEF: </label><span id="def">304</span><br>
+
+    </body>
+    
+</html>
