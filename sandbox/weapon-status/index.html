@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="calc.js"></script>
     <script type="text/javascript" src="weapon.js"></script>
 </head>
 
@@ -12,11 +13,13 @@
         <select name="weapon">
 
         </select>
+        <input type="number" id="enhance" min="0" max="60" value="0">
     </div>
 
     <label>レアリティ: </label><span id="rarelity">0</span><br>
     <label>ベースATK: </label><span id="base-atk">0</span><br>
     <label>補正値: </label><span id="variance">0</span><br>
+    <label>ATK: </label><span id="atk">0</span><br>
 </body>
 
 </html>
