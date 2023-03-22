@@ -1,6 +1,12 @@
 // 武器データ
 const weapons = [
     {
+      name: "武器装備無し",
+      rarelity: 0,
+      base_attack: 0,
+      variance: 0,
+    },
+    {
       name: "エヴォルイクリス",
       rarelity: 6,
       base_attack: 346,
@@ -22,9 +28,11 @@ const weapons = [
 
 // 選択肢作成
 $(function() {
+  
     for (let i=0; i<weapons.length; ++i) {
         $('select[name="weapon"]').append($("<option>").val(i).text(weapons[i].name));
     }
+
 });
 
 // 反映
